@@ -9,9 +9,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
+import javax.persistence.*;
 
-@Entity
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 @AllArgsConstructor(staticName = "build")
+@Entity
+@Table(name = "students")
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,6 +43,7 @@ public class Student {
     }
 
     public Student() {
+    	this(null, null,null, null,null, null,null);
 
     }
 

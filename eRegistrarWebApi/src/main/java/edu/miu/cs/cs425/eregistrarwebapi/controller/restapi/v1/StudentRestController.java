@@ -19,7 +19,7 @@ public class StudentRestController {
     public StudentService studentService;
 
     @GetMapping(value = {"/list", "/all"})
-    public List<Student>listStudents() {
+    public List<Student> listStudents() {
         return studentService.getAllStudents();
     }
 

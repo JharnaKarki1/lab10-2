@@ -19,15 +19,8 @@ public class StudentServiceImpl implements StudentService {
     }
     @Override
     public List<Student> getAllStudents() {
-        var students = this.studentRepository.findAll();
+        var students = this.studentRepository.findAll(Sort.by("FirstName"));
         return students;
-    }
-
-    @Override
-    public Student registerStudent(StudentRequest studentRequest) {
-        var student = Student.build(null, studentRequest.getStudentNumber(), studentRequest.getFirstName(), studentRequest.getMiddleName(),
-                studentRequest.getLastName(), studentRequest.getCgpa(),studentRequest.getDateOfEnrollment(), studentRequest.getIsInternational());
-        return studentRepository.save(student);
     }
 
     @Override
@@ -35,7 +28,15 @@ public class StudentServiceImpl implements StudentService {
         var student = this.studentRepository.findById(studentId);
         return student.orElse(null);
     }
+    
+    @Override
+    public Student registerStudent(StudentRequest studentRequest) {
+        var student = Student.build(null, studentRequest.getStudentNumber(), studentRequest.getFirstName(), studentRequest.getMiddleName(),
+                studentRequest.getLastName(), studentRequest.getCgpa(),studentRequest.getDateOfEnrollment(), studentRequest.getIsInternational());
+        return studentRepository.save(student);
+    }
 
+   
     @Override
     public Student updateStudentById(StudentRequest studentRequest, Integer studentId) {
         var student = Student.build(studentId, studentRequest.getStudentNumber(), studentRequest.getFirstName(), studentRequest.getMiddleName(),
